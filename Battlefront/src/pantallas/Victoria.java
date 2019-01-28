@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
@@ -44,7 +45,7 @@ public class Victoria implements IPantalla, Runnable {
 		sonido = new Thread(this);
 		sonido.start();
 		try {
-			fondo = ImageIO.read(new File("Imagenes/halconGanando.jpg"));
+			fondo = ImageIO.read(new File("Battlefront/Imagenes/nabooF.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -56,13 +57,13 @@ public class Victoria implements IPantalla, Runnable {
 		g.drawImage(fondoescalado, 0, 0, null);
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("MiLetra", Font.BOLD, 50));
-		g.drawString("Salvaste la galaxia ", paneljuego.getWidth() / 2 - 270, paneljuego.getHeight() / 2 - 230);
-		g.setColor(Color.BLACK);
+		g.drawString("Has salvado Naboo ", paneljuego.getWidth() / 2 - 270, paneljuego.getHeight() / 2 - 230);
+		g.setColor(Color.WHITE);
 		g.setFont(PantallaJugar.font);
 
-		g.drawString(formatoDecimal.format((PantallaJugar.tiempoDeJuego) / 1000000000) + " segundos.",
-				paneljuego.getWidth() / 2 - 60, paneljuego.getHeight() / 2 - 70);
-		g.setColor(colorLetra);
+		g.drawString(formatoDecimal.format((PantallaJugar.tiempoDeJuego) / 1000000) + " puntos.",
+				paneljuego.getWidth() / 2 - 90, paneljuego.getHeight() / 2 - 70);
+		g.setColor(Color.WHITE);
 		g.setFont(new Font("MiLetra", Font.BOLD, 35));
 		g.drawString("Volver a Jugar", paneljuego.getWidth() / 2 - 110, paneljuego.getHeight() / 2 + 100);
 	}
@@ -92,7 +93,6 @@ public class Victoria implements IPantalla, Runnable {
 
 	@Override
 	public void pulsarRaton(MouseEvent e) {
-
 		paneljuego.setPantalla(new Intro(paneljuego));
 		sonido.stop();
 	}
@@ -108,7 +108,7 @@ public class Victoria implements IPantalla, Runnable {
 		try {
 			FileInputStream fis;
 			Player player;
-			BufferedInputStream bis = new BufferedInputStream(new FileInputStream("Musica/cancionBuena.mp3"));
+			BufferedInputStream bis = new BufferedInputStream(new FileInputStream("Battlefront/Musica/naboo.mp3"));
 			player = new Player(bis);
 			Thread.sleep(1000);
 			player.play();
@@ -123,6 +123,11 @@ public class Victoria implements IPantalla, Runnable {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void moverTeclas(KeyEvent e) {
+	
 	}
 
 }

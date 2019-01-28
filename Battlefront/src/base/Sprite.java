@@ -8,6 +8,8 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
+import pantallas.PantallaJugar2;
+
 /**
  * @author jesusredondogarcia Clase Sprite. Representa un elemento pintable y
  *         colisionable del juego.
@@ -15,7 +17,7 @@ import javax.imageio.ImageIO;
 public class Sprite {
 
 	private BufferedImage buffer;
-	private Color color = Color.BLACK;
+	private Color color = Color.RED;
 
 	private int ancho;
 	private int alto;
@@ -86,26 +88,46 @@ public class Sprite {
 	}
 
 	public void moverSprite(int anchoFrame, int altoFrame) {
+
 		if (posX >= anchoFrame - ancho) { // por la derecha
+
 			velocidadX = -1 * Math.abs(velocidadX);
+
 		}
 		if (posX <= 0) {// por la izquierda
+
 			velocidadX = Math.abs(velocidadX);
-			;
+
 		}
 		if (posY >= altoFrame - alto) {// por abajo
+
 			velocidadY = -1 * Math.abs(velocidadY);
 		}
+
 		if (posY <= 0) { // Por arriba
+
 			velocidadY = Math.abs(velocidadY);
-			;
 		}
 		moverSprite();
 	}
 
 	public void moverSprite() {
-		posX = posX + velocidadX;
-		posY = posY + velocidadY;
+
+		if (PantallaJugar2.vidasEnemigos == 2) {
+			posX = posX + velocidadX * 3;
+			posY = posY + velocidadY * 3;
+
+		}
+
+		if (PantallaJugar2.vidasEnemigos == 1) {
+			posX = posX + velocidadX * 8;
+			posY = posY + velocidadY * 6;
+
+		} else {
+			posX = posX + velocidadX;
+			posY = posY + velocidadY;
+		}
+
 	}
 
 	public void pintarSpriteEnMundo(Graphics g) {

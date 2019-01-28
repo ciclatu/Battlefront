@@ -63,7 +63,7 @@ public class PantallaJugar implements IPantalla, Runnable {
 		// "blank cursor");
 		// paneljuego.setCursor(blankCursor);
 
-		Image im = Toolkit.getDefaultToolkit().createImage("Imagenes/mira.png");
+		Image im = Toolkit.getDefaultToolkit().createImage("Battlefront/Imagenes/mira.png");
 		Cursor cur = Toolkit.getDefaultToolkit().createCustomCursor(im, new Point(1, 1), "will");
 		paneljuego.setCursor(cur);
 
@@ -77,7 +77,7 @@ public class PantallaJugar implements IPantalla, Runnable {
 		moverTeclas(null);
 	}
 
-	String rutaImagen = "Imagenes/starWars.png";
+	String rutaImagen = "Battlefront/Imagenes/starWars.png";
 
 	@Override
 	public void inicializarPantalla() {
@@ -85,7 +85,7 @@ public class PantallaJugar implements IPantalla, Runnable {
 		sonido.start();
 		navesEnemigas = new ArrayList<Sprite>();
 		try {
-			fondo = ImageIO.read(new File("Imagenes/fondoPantalla.jpg"));
+			fondo = ImageIO.read(new File("Battlefront/Imagenes/fondoPantalla.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -130,7 +130,7 @@ public class PantallaJugar implements IPantalla, Runnable {
 		}
 		if (ASTEROIDES == colisiones) {
 			try {
-				fondo = ImageIO.read(new File("Imagenes/starWars.png"));
+				fondo = ImageIO.read(new File("Battlefront/Imagenes/starWars.png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -194,8 +194,9 @@ public class PantallaJugar implements IPantalla, Runnable {
 
 	@Override
 	public void pulsarRaton(MouseEvent e) {
-		String enemigos[] = { "Imagenes/ana.png", "Imagenes/boba.png", "Imagenes/bossk.png", "Imagenes/jabba.png",
-				"Imagenes/yoda.png", "Imagenes/storm.png" };
+		String enemigos[] = { "Battlefront/Imagenes/ana.png", "Battlefront/Imagenes/boba.png",
+				"Battlefront/Imagenes/bossk.png", "Battlefront/Imagenes/jabba.png", "Battlefront/Imagenes/yoda.png",
+				"Battlefront/Imagenes/storm.png" };
 		if (!asteroidesBoolean) {
 
 			Random rd = new Random();
@@ -211,7 +212,7 @@ public class PantallaJugar implements IPantalla, Runnable {
 
 				int velocidadX = rd.nextInt(20) - 10;
 				int velocidadY = rd.nextInt(10) + 1;
-				creador = new Sprite(ANCHO_ASTEROIDE, ALTO_ASTEROIDE, 500, 500, 0, 0, enemigos[ene]);
+				creador = new Sprite(ANCHO_ASTEROIDE, ALTO_ASTEROIDE, posX,poxY , velocidadX, velocidadY, "Battlefront/Imagenes/droide.png");
 
 				navesEnemigas.add(creador);
 			}
@@ -223,16 +224,8 @@ public class PantallaJugar implements IPantalla, Runnable {
 				if (disparo == null) { // No tengo disparo, lo creo:
 
 					disparo = new Sprite(ANCHO_DISPARO, ALTO_DISPARO, (e.getX() - ANCHO_DISPARO / 2) - 30, e.getY(), 0,
-							0, "Imagenes/mira2.png");
+							-100, "Battlefront/Imagenes/misil.png");
 
-				}
-
-				try {
-					Player disparo = new Player(new FileInputStream("Musica/disparo.mp3"));
-					// disparo.play();
-				} catch (FileNotFoundException | JavaLayerException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
 
 			}
@@ -286,22 +279,13 @@ public class PantallaJugar implements IPantalla, Runnable {
 
 		for (int i = 0; i < navesEnemigas.size() && disparo != null; i++) {
 			if (navesEnemigas.get(i).colisionan(disparo)) {
+				
 				navesEnemigas.remove(i);
 				colisiones++;
 				disparo = null;
 			}
 
 		}
-		// para que cuando se encuentren se destruyan
-		// for (int i = 0; i < navesEnemigas.size() - 1; i++) {
-		// for (int j = i + 1; j < navesEnemigas.size(); j++) {
-		// if (navesEnemigas.get(i).colisionan(navesEnemigas.get(j))) {
-		// navesEnemigas.remove(j);
-		// navesEnemigas.remove(i);
-		// System.out.println("hola");
-		// }
-		// }
-		// }
 
 	}
 
@@ -313,7 +297,7 @@ public class PantallaJugar implements IPantalla, Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		panelJuego.setPantalla(new Victoria(panelJuego));
+		panelJuego.setPantalla(new PantallaJugar2(panelJuego));
 	}
 
 	@Override
@@ -321,7 +305,7 @@ public class PantallaJugar implements IPantalla, Runnable {
 		try {
 			FileInputStream fis;
 			Player player;
-			fis = new FileInputStream("Musica/espacio.mp3");
+			fis = new FileInputStream("Battlefront/Musica/espacio.mp3");
 			BufferedInputStream bis = new BufferedInputStream(fis);
 			player = new Player(bis);
 			Thread.sleep(1000);

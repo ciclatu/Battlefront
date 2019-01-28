@@ -26,8 +26,8 @@ public class Intro implements IPantalla, Runnable {
 		super();
 		this.panelJuego = panelJuego;
 		try {
-			fondo = ImageIO.read(new File("Imagenes/fondoStar.jpg"));
-			fondoEscalado = ImageIO.read(new File("Imagenes/fondoStar.jpg"));
+			fondo = ImageIO.read(new File("Battlefront/Imagenes/fondoStar.jpg"));
+			fondoEscalado = ImageIO.read(new File("Battlefront/Imagenes/fondoStar.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -104,7 +104,7 @@ public class Intro implements IPantalla, Runnable {
 		try {
 			FileInputStream fis;
 			Player player;
-			fis = new FileInputStream("Musica/intro.mp3");
+			fis = new FileInputStream("Battlefront/Musica/introS.mp3");
 			BufferedInputStream bis = new BufferedInputStream(fis);
 			player = new Player(bis);
 			player.play();

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -35,7 +36,7 @@ public class Derrota implements IPantalla, Runnable {
 	public void inicializarPantalla() {
 		panelJuego.setCursor(null);
 		try {
-			fondo = ImageIO.read(new File("Imagenes/halconSuelo.jpg"));
+			fondo = ImageIO.read(new File("Battlefront/Imagenes/halconSuelo.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -103,7 +104,7 @@ public class Derrota implements IPantalla, Runnable {
 
 			FileInputStream fis;
 			Player player;
-			fis = new FileInputStream("Musica/cancionMala.mp3");
+			fis = new FileInputStream("Battlefront/Musica/cancionMala.mp3");
 			BufferedInputStream bis = new BufferedInputStream(fis);
 
 			player = new Player(bis);
@@ -120,5 +121,11 @@ public class Derrota implements IPantalla, Runnable {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void moverTeclas(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
